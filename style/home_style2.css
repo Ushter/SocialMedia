@@ -1,0 +1,28 @@
+body {
+    overflow-x: hidden;
+    background-color: rgb(31, 224, 111);
+}
+
+label {
+    padding: 7px;
+    display: table;
+    color: rgb(160, 18, 18);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#content {
+    width: 50%;
+}
+
+#insert_post {
+    background-color: rgb(185, 185, 185);
+    border: 2px solid #db2d58;
+}
+
+#posts {
+    border: 5px solid #00070c;
+    padding: 20px 35px;
+}
