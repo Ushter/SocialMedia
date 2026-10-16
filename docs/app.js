@@ -14,3 +14,15 @@ document.querySelector('#composer').addEventListener('submit',e=>{e.preventDefau
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.view){document.querySelectorAll('[data-view]').forEach(n=>n.setAttribute('aria-current',n===b?'page':'false'));document.querySelector('#feed').hidden=b.dataset.view!=='feed';document.querySelector('#members').hidden=b.dataset.view!=='members';notify('')}if(b.dataset.like){let p=state.posts.find(p=>p.id===Number(b.dataset.like));p.liked=!p.liked;renderPosts()}if(b.dataset.delete){state.posts=state.posts.filter(p=>p.id!==Number(b.dataset.delete));renderPosts();notify('Demo post deleted.')}if(b.dataset.follow){let n=b.dataset.follow;state.following=state.following.includes(n)?state.following.filter(x=>x!==n):[...state.following,n];renderPeople()}saveState('hitmeup-demo-v1',state)});
 document.querySelector('#search').addEventListener('input',renderPeople);
 document.querySelector('#reset').addEventListener('click',()=>{state=structuredClone(initial);saveState('hitmeup-demo-v1',state);renderPosts();renderPeople();notify('Demo reset to sample data.')});renderPosts();renderPeople();
+
+// Simulate entry and logout without collecting credentials or creating a server session.
+// Opening the demo always starts at the sample-account screen.
+function setDemoEntry(loggedIn){
+ document.querySelector('#login-screen').hidden=loggedIn;
+ document.querySelector('#demo-app').hidden=!loggedIn;
+ document.querySelector('#demo-footer').hidden=!loggedIn;
+ const target=loggedIn?document.querySelector('#demo-app h1'):document.querySelector('#login-title');
+ target.setAttribute('tabindex','-1'); target.focus();
+}
+document.querySelector('#demo-login').addEventListener('click',()=>setDemoEntry(true));
+document.querySelector('#demo-logout').addEventListener('click',()=>setDemoEntry(false));
