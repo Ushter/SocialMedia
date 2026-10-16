@@ -31,3 +31,5 @@ document.querySelector('#demo-logout').addEventListener('click',()=>setDemoEntry
 // The profile preview permits a local bio edit; account operations remain disabled.
 const bioField=document.querySelector('#profile-bio');bioField.value=state.bio||'';
 document.querySelector('#profile-form').addEventListener('submit',e=>{e.preventDefault();state.bio=bioField.value.trim();saveState('hitmeup-demo-v1',state);notify('Demo bio saved in this browser.')});
+
+document.querySelector('#reset').addEventListener('click',()=>{bioField.value='';});
